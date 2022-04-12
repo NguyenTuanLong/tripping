@@ -17,8 +17,7 @@ export default function NavBar() {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
-                exact
-                to="/"
+                exact to="/"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -28,8 +27,7 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
-                to="/about"
+                exact to="/about"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -39,8 +37,7 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
-                to="/blog"
+                exact to="/blog"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
@@ -50,8 +47,7 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact
-                to="/contact"
+                exact to="/contact"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}

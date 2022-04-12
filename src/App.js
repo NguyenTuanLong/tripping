@@ -29,20 +29,27 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile/:id" element={<Profile />} />
 
-            <Route exact path="/" element={<PrivateRoute />} >
+            <Route element={<PrivateRoute/>}>
               <Route exact path="/myprofile" element={<PrivateScreen/>} />
             </Route>
+            
+            {/* <Route
+              path="/myprofile"
+              element={
+                <PrivateRoute>
+                  <PrivateScreen />
+                </PrivateRoute>
+              }
+            /> */}
             {/* <PrivateRoute exact path="/myprofile" element={<PrivateScreen/>} /> */}
             <Route exact path="/login" element={<LoginScreen/>} />
             <Route exact path="/register" element={<RegisterScreen/>} />
             <Route
-              exact
-              path="/forgotpassword"
+              exact path="/forgotpassword"
               element={<ForgotPasswordScreen/>}
             />
             <Route
-              exact
-              path="/passwordreset/:resetToken"
+              exact path="/passwordreset/:resetToken"
               element={<ResetPasswordScreen/>}
             />
             </Routes>

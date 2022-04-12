@@ -1,14 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./RegisterScreen.css";
 
-const RegisterScreen = ({ history }) => {
+const RegisterScreen = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  let navigate = useNavigate();
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -41,7 +42,7 @@ const RegisterScreen = ({ history }) => {
 
       localStorage.setItem("authToken", data.token);
 
-      history.push("/");
+      navigate("/");
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {
