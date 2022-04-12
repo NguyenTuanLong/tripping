@@ -23,6 +23,9 @@ exports.getAvatar  = async (req, res, next) => {
         success: true,
         newAvatar,
       });
+    } 
+    else {
+      return next(new ErrorResponse("Avatar not found", 404));
     }
     
   }catch(err){

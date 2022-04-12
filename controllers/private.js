@@ -180,3 +180,34 @@ exports.postUserProfile = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateUserProfile = async (req, res, next) => {
+  var userId = req.user.id;
+  try{
+    const newProfile = await Profile.findOne({ user: userId })
+    if(!newProfile){
+      res
+      .status(404)
+      .json({
+        success: false,
+      });
+    }
+    else{
+      try {
+        await Profile.findOneAndUpdate({ "user" : userId }, { $set: req.body }, { upsert: true, new: true, useFindAndModify: false});
+        res
+        .status(200)
+        .json({
+          success: true,
+        });
+      } catch (err) {
+        return next(new ErrorResponse("Can't update new profile", 500));
+        // console.log(err);
+      }
+    }
+
+
+  }catch(err){
+    next(err);
+  }
+}
