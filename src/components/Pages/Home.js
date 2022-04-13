@@ -4,6 +4,7 @@ import User from "../Pages/User";
 import Profile from "../Pages/Profile";
 import Slider from "react-slick";
 import { Link } from "react-router-dom"
+import NavBar from "../NavBar/NavBar";
 
 class Home extends React.Component{
 
@@ -19,7 +20,7 @@ class Home extends React.Component{
     try
     {
       const result = await axios.get("http://localhost:5000/api/allprofile");
-      console.log(result.data.data);
+      //console.log(result.data.data);
       this.setState({listUser:result.data.data});
       this.setState({user_id: result.data.data.user});
     }
@@ -80,7 +81,7 @@ class Home extends React.Component{
               {
                 user.about = user.about.substr(0, 15) + "...";
               }
-              console.log(user.user);
+              //(user.user);
               return (
                 <React.Fragment>
                   <Link to={"/profile/" + user._id}>

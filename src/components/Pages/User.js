@@ -19,6 +19,7 @@ class User extends React.Component {
   getAvatar = async() =>
   {
     var userid = this.props.user_id;
+    console.log(userid);
     await axios.get("http://localhost:5000/api/avatar/" + userid)
     .then(response => {
       this.setState({avatar:response.data.newAvatar});

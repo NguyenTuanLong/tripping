@@ -14,7 +14,7 @@ class Profile extends React.Component{
       getProfile = async() =>
       {
             var profile_id = window.location.pathname.substring(9, window.location.pathname.length);
-            console.log(profile_id);
+            // console.log(profile_id);
             await axios.get("http://localhost:5000/api/profile/" + profile_id)
             .then(response => {
                   this.setState({profile:response.data.profile});
@@ -30,7 +30,7 @@ class Profile extends React.Component{
 
       render()
       {
-            console.log(this.state.profile);
+            // console.log(this.state.profile);
             return (
                   <div className="frame-user-name">
                         Tên: {this.state.profile.firstName +' '+ this.state.profile.lastName}

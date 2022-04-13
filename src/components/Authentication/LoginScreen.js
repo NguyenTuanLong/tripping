@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginScreen.css";
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,13 +26,13 @@ const LoginScreen = () => {
 
     try {
       const { data } = await axios.post(
-        "/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         { email, password },
         config
       );
-
+      // console.log("data.." + data )
       localStorage.setItem("authToken", data.token);
-
+      props.onLogin();
       navigate("/");
     } catch (error) {
       setError(error.response.data.error);
