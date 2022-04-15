@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { login, logout } from "../Redux/User";
+
 import "./PrivateScreen.css";
 
 const PrivateScreen = () => {
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
+
+  const dispatch = useDispatch();
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +25,7 @@ const PrivateScreen = () => {
       };
 
       try {
-        const { data } = await axios.get("http://localhost:5000/api/private", config);
+        const { data } = await axios.get("/api/private", config);
         setPrivateData(data.data);
       } catch (error) {
         localStorage.removeItem("authToken");
@@ -32,6 +39,8 @@ const PrivateScreen = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("authToken");
+    dispatch(logout());
+    console.log("removed user ID");
     navigate("/");
   }
 

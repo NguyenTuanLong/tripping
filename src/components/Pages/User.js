@@ -1,70 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import avatar from "../NavBar/avt.jpg"
 import "./User.css"
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-class User extends React.Component {
+export default function User(props) {
+  const [avatar, setAvatar] = useState("");
+  const [load, setLoad] = useState(false);
+  var avatarLink;
 
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      avatar: avatar,
-      load: false
-    };
-  }
 
-  getAvatar = async() =>
+  const getAvatar = async() =>
   {
-    var userid = this.props.user_id;
-    console.log(userid);
+    var userid = props.user_id;
     await axios.get("http://localhost:5000/api/avatar/" + userid)
     .then(response => {
-      this.setState({avatar:response.data.newAvatar});
-      this.setState({load: true});
+      setAvatar(response.data.newAvatar);
+      setLoad(true);
     })
     .catch(function (error) {
       console.log(error);
     });
   }
 
-  componentDidMount(){
-    this.getAvatar();
-  }
+  useEffect(() => {
+    getAvatar();
+    if(load === true)
+    {
+      avatarLink = "http://localhost:5000/images/" + avatar.avatar.substr(7, avatar.avatar.length);
+    }
+  }, []);
 
-  render()
-  {
-      var avatarLink;
-      if(this.state.avatar && this.state.load === true)
-      {
-        avatarLink = "http://localhost:5000/images/" + this.state.avatar.avatar.substr(7, this.state.avatar.avatar.length);
-      }
-      return (
-        <div>
-              <div className="frame-user">
-                  <div className="frame-user-img">
-                    {
-                      this.state.avatar && this.state.load === true
-                      ? <img className="imgAvt" src={avatarLink} alt="Avatar"></img>
-                      : <div></div>
-                    }
-                  </div>
-                  <div className="frame-user-name">
-                    Tên: {this.props.name}
-                    <br/>
-                    Location: {this.props.location}
-                  </div>
-                  <div className="frame-user-desc">
-                    Occupation: {this.props.occupation}
-                    <br/>
-                    About: {this.props.about}
-                  </div>
+  return (
+    <div>
+          <div className="frame-user">
+              <div className="frame-user-img">
+                {
+                  avatar && load === true
+                  ? <img className="imgAvt" src={avatarLink} alt="Avatar"></img>
+                  : <div></div>
+                }
               </div>
-              
-        </div>
-    );
-};
+              <div className="frame-user-name">
+                Tên: {props.name}
+                <br/>
+                Location: {props.location}
+              </div>
+              <div className="frame-user-desc">
+                Occupation: {props.occupation}
+                <br/>
+                About: {props.about}
+              </div>
+          </div>
+          
+    </div>
+);
 }
-export default User

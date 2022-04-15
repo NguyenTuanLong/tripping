@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { login, logout } from "../Redux/User";
+
 import "./LoginScreen.css";
 
-const LoginScreen = (props) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -26,13 +31,15 @@ const LoginScreen = (props) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "/api/auth/login",
         { email, password },
         config
       );
-      // console.log("data.." + data )
+      
       localStorage.setItem("authToken", data.token);
-      props.onLogin();
+      
+      dispatch(login({id:data.id}));
+
       navigate("/");
     } catch (error) {
       setError(error.response.data.error);

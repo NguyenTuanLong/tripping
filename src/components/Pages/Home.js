@@ -1,37 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import User from "../Pages/User";
 import Profile from "../Pages/Profile";
 import Slider from "react-slick";
 import { Link } from "react-router-dom"
-import NavBar from "../NavBar/NavBar";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
-class Home extends React.Component{
+export default function Home() {
+  const [listUsers, setListUsers] = useState([]);
 
-  constructor(props) {
-    super(props);
-    //Chỉ định một state
-    this.state = {
-      listUser: []
-    };
-  }
-  getProfile = async() => 
+  const getProfile = async() => 
   {
     try
     {
       const result = await axios.get("http://localhost:5000/api/allprofile");
-      //console.log(result.data.data);
-      this.setState({listUser:result.data.data});
-      this.setState({user_id: result.data.data.user});
+      // console.log(result.data.data);
+      setListUsers(result.data.data);
+      // this.setState({user_id: result.data.data.user});
     }
     catch(e)
     {
       console.log("Error");
     }
   }
-  
 
-  settings = {
+  const settings = {
     dots: true,
     infinite: false,
     speed: 500,
@@ -65,42 +59,38 @@ class Home extends React.Component{
       }
     ]
   };
-  items = []
-  // for (let index = 0; index < 3; index ++) {
-  //   items.push(<User />)
-  // }
-  componentDidMount() {
-    this.getProfile();
-  }
-  render() {
-    return (
-        <Slider {...this.settings}>
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  return (
+    <Slider {...settings}>
+      {
+        listUsers.map((user, index) => {
+          if(user.about.length > 15)
           {
-            this.state.listUser.map((user, index) => {
-              if(user.about.length > 15)
-              {
-                user.about = user.about.substr(0, 15) + "...";
-              }
-              //(user.user);
-              return (
-                <React.Fragment>
-                  <Link to={"/profile/" + user._id}>
-                  <User avatar = {user.firstName}
-                              name = {user.firstName + " " + user.lastName}
-                              about = {user.about}        
-                              location = {user.location}
-                              occupation = {user.occupation}     
-                              user_id = {user.user}
-
-                        />
-                  </Link>       
-                </React.Fragment>
-
-              );
-            })
+            user.about = user.about.substr(0, 15) + "...";
           }
-        </Slider>
-    );
-  }
+          // console.log(user.user);
+          return (
+            <React.Fragment>
+              <Link to={"/profile/" + user._id}>
+              <User avatar = {user.firstName}
+                          name = {user.firstName + " " + user.lastName}
+                          about = {user.about}        
+                          location = {user.location}
+                          occupation = {user.occupation}     
+                          user_id = {user.user}
+
+                    />
+              </Link>       
+            </React.Fragment>
+
+          );
+        })
+      }
+    </Slider>
+);
+
 }
-export default Home
