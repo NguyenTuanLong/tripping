@@ -35,7 +35,7 @@ exports.getAvatar  = async (req, res, next) => {
 };
 
 exports.getAllProfile = async (req, res, next) => {
-  Profile.find({}, function(err,profiles) {
+  await Profile.find({}, function(err,profiles) {
     return res.json({
       data: profiles,
     });
@@ -45,11 +45,23 @@ exports.getAllProfile = async (req, res, next) => {
 
 exports.getProfile = async (req, res, next) => {
   var profileId = req.params.id;
-  Profile.findOne({_id: profileId}, function(err, profile) {
+  await Profile.findOne({_id: profileId}, function(err, profile) {
     return res.status(200)
     .json({
       success: true,
       profile,
     });
   });
+};
+
+exports.search = async (req, res, next) => {
+  var searchString = req.body.searchString;
+  console.log(req.body);
+  Profile.find({$text: {$search: searchString}}, function(err,profiles) {
+    return res.json({
+      data: profiles,
+    });
+    // return res.end(JSON.stringify(profiles));
+  });
+
 };

@@ -7,12 +7,14 @@ const {
     getAllProfile,
     getProfile,
     getAvatar,
+    search,
 } = require("../controllers/public");
 
 router.route("/alluser").get(getAllUser);
 router.route("/allprofile").get(getAllProfile);
 router.route("/profile/:id").get(getProfile);
 router.route("/avatar/:id").get(getAvatar);
+router.route("/search").post(search);
 
 
 module.exports = router;

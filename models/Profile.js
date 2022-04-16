@@ -60,7 +60,7 @@ const ProfileSchema = new mongoose.Schema({
         default: Date.now(),
     },
 });
-
+ProfileSchema.index({firstName: 'text', lastName:'text', about:'text', languages:'text', degree:'text', occupation:'text', location:'text', nationality:'text'});
 // ProfileSchema.pre("save", async function (next) {
 //     this.availability = "available";
 //     this.dateOfCreation = Date.now();

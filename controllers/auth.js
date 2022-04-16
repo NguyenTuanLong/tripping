@@ -132,6 +132,7 @@ try {
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
-    res.status(statusCode).json({ sucess: true, token });
+    const id = user._id;
+    res.status(statusCode).json({ sucess: true, token, id });
 };
   
