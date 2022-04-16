@@ -30,7 +30,6 @@ class Profile extends React.Component{
 
       render()
       {
-            console.log(this.state.profile);
             return (
                   <div className="frame-user-name">
                         Tên: {this.state.profile.firstName +' '+ this.state.profile.lastName}

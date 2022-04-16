@@ -7,10 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userReducer from "./components/Redux/User";
+import SearchStringReducer from './components/Redux/SearchString';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
+    searchString: SearchStringReducer,
   },
 });
 

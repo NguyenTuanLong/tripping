@@ -120,3 +120,20 @@
   display: inline-block;
   font-size: 16px;
 }
+
+.nav-search{
+  padding: 0.5rem 1rem;
+  width: 400px;
+  overflow: hidden;
+}
+
+.searchInputs{
+  width: 300px;
+  font-size:18px;
+  height: 20px;
+  float: left;
+}
+
+.searchIcon{
+  
+}
