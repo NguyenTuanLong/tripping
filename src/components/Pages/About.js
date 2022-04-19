@@ -75,12 +75,9 @@ export const About = () => {
 
   const onSubmit =  async(data) =>
   {
-    //setAllValues({...allValues, [data.target.name]: data.target.value});
     if ( profile === "" )
     {
-      //setAllValues({firstName: data.firstName});
       setStateAll(data);
-      console.log("bừa vcl")
       console.log(allValues)
       const config = {
         headers: {
@@ -110,7 +107,6 @@ export const About = () => {
       };
       try
       {
-        console.log("data>>" + data);
         const result = await axios.patch("http://localhost:5000/api/private/user/profile", data, config);
         console.log(result);
       }
