@@ -20,7 +20,7 @@ export default function User(props) {
       setLoad(true);
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
   }
 
