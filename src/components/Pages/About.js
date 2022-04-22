@@ -1,6 +1,7 @@
 import React, { useState, useEffect }  from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import Upload from "../Pages/User";
 import "./About.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
