@@ -7,6 +7,8 @@ import { Blog } from "./components/Pages/Blog";
 import { Contact } from "./components/Pages/Contact";
 import Profile from "./components/Pages/Profile";
 import Search from "./components/Pages/Search";
+import { Gig } from "./components/Pages/Gig";
+
 
 
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -62,6 +64,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/gig/:id" element={<Gig />} />
             <Route path="/search" element={<Search />} />
 
             <Route element={<PrivateRoute/>}>
