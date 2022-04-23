@@ -21,20 +21,23 @@ export default function NavBar() {
     
     const getAvatar = async() =>
     {
-      var userid = user.id;
-      console.log("userID:" + userid);
-      axios.get("http://localhost:5000/api/avatar/" + userid)
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      };
+      axios.get("http://localhost:5000/api/private/user/avatar", config)
       .then(response => {
         var avatarLink = "http://localhost:5000/images/" + response.data.newAvatar.avatar.substr(7, response.data.newAvatar.avatar.length);
-        // console.log(response.data.newAvatar.avatar);
         setAvatarURL(avatarLink);
-      
+        // console.log("URL: "+avatarLink);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    }
+  
+    }    
 
     const sendSearchData = async() => {
       dispatch(changekeyword({keyword:wordEntered}));
@@ -45,6 +48,10 @@ export default function NavBar() {
     const handleChange = async(event) => {
       const searchWord = event.target.value;
       setWordEntered(searchWord);
+    }
+
+    const avatarClick = () => {
+      navigate("/myprofile");
     }
 
     useEffect(() => {
@@ -97,15 +104,15 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               <NavLink
-                exact to="/about"
+                exact to="/editprofile"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
               >
-                About
+                Edit
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 exact to="/blog"
                 activeClassName="active"
@@ -114,15 +121,14 @@ export default function NavBar() {
               >
                 Blog
               </NavLink>
-            </li>
+            </li> */}
             {
               user.id !== ""
               ?
               (
               <li className="nav-item dropdown">
                     <button className=" buttonAvatar" >
-                      <img src={avatarURL} className="avatar">
-                              
+                      <img src={avatarURL} className="avatar" onClick={avatarClick}>
                       </img>
                     </button>
               </li>

@@ -2,13 +2,13 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/Home";
-import { About } from "./components/Pages/About";
+import ChangProfile from "./components/Pages/ChangProfile";
 import { Blog } from "./components/Pages/Blog";
 import { Contact } from "./components/Pages/Contact";
 import Profile from "./components/Pages/Profile";
 import Search from "./components/Pages/Search";
-import { Gig } from "./components/Pages/Gig";
-
+import Gig from "./components/Pages/Gig";
+import MyProfile from "./components/Pages/MyProfile";
 
 
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -60,7 +60,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/editprofile" element={<ChangProfile />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile/:id" element={<Profile />} />
@@ -68,7 +68,7 @@ function App() {
             <Route path="/search" element={<Search />} />
 
             <Route element={<PrivateRoute/>}>
-              <Route exact path="/myprofile" element={<PrivateScreen/>} />
+              <Route exact path="/myprofile" element={<MyProfile/>} />
             </Route>
             
             {/* <Route

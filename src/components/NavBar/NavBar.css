@@ -123,17 +123,17 @@
 
 .nav-search{
   padding: 0.5rem 1rem;
-  width: 400px;
+  width: 520px;
   overflow: hidden;
 }
 
 .searchInputs{
-  width: 300px;
-  font-size:18px;
-  height: 20px;
+  width: 400px;
+  font-size:25px;
+  height: 38px;
   float: left;
 }
 
 .searchIcon{
-  
+  float: right;
 }

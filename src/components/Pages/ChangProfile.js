@@ -1,13 +1,14 @@
 import React, { useState, useEffect }  from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import Upload from "./User";
 import "./About.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useSelector, useDispatch } from "react-redux";
 import { changekeyword } from "../Redux/SearchString";
 
-export const About = () => {
+export default function ChangeProfile(){
 
   const [avatarURL, setAvatarURL] = useState("");
   const user = useSelector((state) => state.user.value);
@@ -29,13 +30,16 @@ export const About = () => {
   
   const getAvatar = async() =>
   {
-    var userid = user.id;
-    console.log("userID:" + userid);
-    axios.get("http://localhost:5000/api/avatar/" + userid)
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    };
+    axios.get("http://localhost:5000/api/private/user/avatar", config)
     .then(response => {
       var avatarLink = "http://localhost:5000/images/" + response.data.newAvatar.avatar.substr(7, response.data.newAvatar.avatar.length);
       setAvatarURL(avatarLink);
-    
     })
     .catch(function (error) {
       console.log(error);
@@ -54,18 +58,18 @@ export const About = () => {
     axios.get("http://localhost:5000/api/private/user/profile/", config)
     .then(response => {
       setProfile({
-        id: response.data.newProfile._id,
-        firstName: response.data.newProfile.firstName,
-        lastName: response.data.newProfile.lastName,
-        location: response.data.newProfile.location,
-        occupation: response.data.newProfile.occupation,
-        degree: response.data.newProfile.degree,
-        nationality:response.data.newProfile.nationality,
-        languages: response.data.newProfile.languages,
-        phoneNumber: response.data.newProfile.phoneNumber,
-        gender: response.data.newProfile.gender,
-        about: response.data.newProfile.about,
-        dateOfBirth: response.data.newProfile.dateOfBirth.split("T")[0],   
+        id: response.data.profile._id,
+        firstName: response.data.profile.firstName,
+        lastName: response.data.profile.lastName,
+        location: response.data.profile.location,
+        occupation: response.data.profile.occupation,
+        degree: response.data.profile.degree,
+        nationality:response.data.profile.nationality,
+        languages: response.data.profile.languages,
+        phoneNumber: response.data.profile.phoneNumber,
+        gender: response.data.profile.gender,
+        about: response.data.profile.about,
+        dateOfBirth: response.data.profile.dateOfBirth.split("T")[0],   
       });
     })
     .catch(function (error) {
@@ -391,7 +395,7 @@ export const About = () => {
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div className="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="text" className="form-control" id="phoneNumber" name="phoneNumber" placeholder={profile.phoneNumber} {...register("phoneNumber")}/>
+                <input type="text" className="form-control" id="phoneNumber" name="phoneNumber" pattern="^[0-9]+$" title="number only" placeholder={profile.phoneNumber} {...register("phoneNumber")}/>
               </div>
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -403,7 +407,7 @@ export const About = () => {
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <div className="form-group">
                 <label for="dateOfBirth">Date of birth</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" min="1990-01-01" max="2020-12-31" className="form-control" placeholder={profile.dateOfBirth}{...register("dateOfBirth")} />
+                <input type="date" id="dateOfBirth" name="dateOfBirth" min="1900-01-01" max="2020-12-31" className="form-control" placeholder={profile.dateOfBirth}{...register("dateOfBirth")} />
               </div>
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

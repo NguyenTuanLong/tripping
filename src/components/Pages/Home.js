@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import User from "../Pages/User";
 import Profile from "../Pages/Profile";
+import "./Home.css"
 import Slider from "react-slick";
 import { Link } from "react-router-dom"
 import "slick-carousel/slick/slick.css"; 
@@ -21,7 +22,7 @@ export default function Home() {
     }
     catch(e)
     {
-      console.log("Error");
+      console.log(e);
     }
   }
 
@@ -70,18 +71,18 @@ export default function Home() {
         listUsers.map((user, index) => {
           if(user.about.length > 15)
           {
-            user.about = user.about.substr(0, 15) + "...";
+            user.about = user.about.substr(0, 25) + "...";
           }
           // console.log(user.user);
           return (
             <React.Fragment>
               <Link to={"/profile/" + user._id}>
-              <User avatar = {user.firstName}
-                          name = {user.firstName + " " + user.lastName}
-                          about = {user.about}        
-                          location = {user.location}
-                          occupation = {user.occupation}     
-                          user_id = {user.user}
+              <User className = "decoration" avatar = {user.firstName}
+                    name = {user.firstName + " " + user.lastName}
+                    about = {user.about}        
+                    location = {user.location}
+                    occupation = {user.occupation}     
+                    profile_id = {user._id}
 
                     />
               </Link>       

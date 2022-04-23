@@ -1,26 +1,82 @@
-.frame-user{
-      display: inline-block;
-      margin: 10px;
-      width: 250px;
-      height: 250px;
-      border-style: solid;
-}
-.frame-user-img {
-      width: 100%;
-      height: 50%;
-      border-style: dotted;
-}
-.frame-user-name {
-      width: 99%;
-      height: 20%;
-      border-style: solid;
-}
-.frame-user-desc {
-      width: 99%;
-      height: 24%;
-      border-style:solid;
-}
-.imgAvt {
-      width: 100%;
-      height: 100%;
-}
+
+  .cardUser {
+      width: 350px;
+      background-color: #efefef;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s;
+      text-decoration: none;
+  }
+  
+  .image img {
+      transition: all 0.5s
+  }
+  
+  .cardUser:hover .image img {
+      transform: scale(1.5);
+      text-decoration: none;
+  }
+  
+  .btnUser {
+      height: 140px;
+      width: 140px;
+      border-radius: 50%;
+      text-decoration: none;
+  }
+  
+  .name {
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none
+  }
+  
+  .idd {
+      font-size: 14px;
+      font-weight: 600
+  }
+  
+  .idd1 {
+      font-size: 12px
+  }
+  
+  .number {
+      font-size: 22px;
+      font-weight: bold
+  }
+  
+  .follow {
+      font-size: 12px;
+      font-weight: 500;
+      color: #444444
+  }
+  
+  
+  .text span {
+      font-size: 13px;
+      color: #545454;
+      font-weight: 500;
+      text-decoration: none;
+  }
+  
+  .icons i {
+      font-size: 19px
+  }
+  
+  hr .new1 {
+      border: 1px solid
+  }
+  
+  .join {
+      font-size: 14px;
+      color: #2b00eb;
+      font-weight: bold
+  }
+  
+  .date {
+      background-color: #ccc
+  }
+  .imgAvt
+  {
+      height: 100px;
+      width: 100px;
+  }
